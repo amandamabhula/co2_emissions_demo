@@ -2,7 +2,11 @@
 title: "Workshop Exercise: Emissions Data - Table, Map, and Chart"
 author: "Amanda Mabhula"
 format: html
+execute:
+  echo: false
+  warning: false
 ---
+
 
 # Introduction
 
@@ -139,7 +143,7 @@ fig_chart = px.line(
     x = "year",
     y = "emissions",
     color = "country",
-    labels = {"emissions": "CO2 Emissions", "year" : "Year"},
+    labels = {"emissions": "CO2 Emissions (tonnes)", "year" : "Year"},
     title = "Country-specific CO2 emission trends (1990-2022)",
     log_y=True,
     category_orders={"country" : ["China", "USA", "South Africa", "Belgium", "Argentina"]}
