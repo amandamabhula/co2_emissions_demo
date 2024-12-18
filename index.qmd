@@ -1,14 +1,18 @@
 ---
-title: "Workshop Exercise: Emissions Data - Table, Map, and Chart"
+title: "Workshop: CO2 Emissions Report"
 author: "Amanda Mabhula"
-format: html
+format: 
+    html:
+        embed-resources: true
 execute:
   echo: false
   warning: false
 ---
 
+::: {.content-hidden when-format="html"}
 
-# Introduction
+
+# | Introduction
 
 In this exercise, you will work with a CO2 emissions dataset downloaded from Gapminder and produce a report with three tabs: a data table, a line chart, and a choropleth map. 
 
@@ -16,7 +20,7 @@ The goal is to roughly replicate the [Our World in Data visualization page on co
 
 Be sure to view that page to get an idea of the final product.
 
-# Setup
+# | Setup
 
 - You should have forked and cloned this repository to your local machine.
 
@@ -32,7 +36,7 @@ Be sure to view that page to get an idea of the final product.
 
 - Download the data from [Gapminder](https://www.gapminder.org/data/) by selecting: *Environment > Emissions > CO2 Total emissions*, then downloading the CSV file into a `data` folder in your repository.
 
-# Data Import
+# | Data Import
 
 Run the following code to import the necessary libraries:
 
@@ -51,7 +55,7 @@ Load in your dataset from gapminder below. View it in your data viewer to get an
 emissions = pd.read_csv("data/co2_cons.csv")
 ```
 
-# Initial Cleaning
+# | Initial Cleaning
 
 In this dataset, some values are given in thousands, with a "k" used to represent the thousands. This will cause problems when we try to make these columns numeric. So we need to clean this. We'll do this for you, but pay close attention as you might need it for your final project.
 
@@ -78,7 +82,7 @@ And check that it worked:
 emissions.query("country == 'China'")[["country",  "2020", "2021", "2022"]]
 ```
 
-# Table Section
+# | Table Section
 
 Our goal is to create a table showing emissions for a few selected years and calculate absolute and relative changes.
 
@@ -96,7 +100,7 @@ table_df
 table_df["Absolute Change"] = abs(table_df["2022"] - table_df["2000"])
 
 # Calculate relative change as the absolute change divided by the 2000 emissions, then multiplied by 100
-table_df["Relative Change"] = (table_df["Absolute Change"] / 2000) * 100
+table_df["Relative Change"] = (table_df["Absolute Change"] / table_df["2000"]) * 100
 
 # Round to 0 decimal places, and add a % sign to the relative change
 table_df["Relative Change"] = table_df["Relative Change"].round(0).astype(str) + "%"
@@ -108,7 +112,7 @@ Now we can display this as an interactive table with itables:
 show(table_df)
 ```
 
-# Chart Section
+# | Chart Section
 
 Our goal is to create a line chart from 1990 to 2022 for a few selected countries.
 
@@ -155,7 +159,7 @@ fig_chart.show()
 ```
 
 
-# Mapping Section
+# | Mapping Section
 
 This part is done for you.
 
@@ -189,6 +193,12 @@ fig_map.show()
 
 Below, we place our results into a tabbed interface.
 
+:::
+
+# CO2 Emissions
+
+Global and country-specific CO2 emissions from 1990 to 2022, in table, chart and map format:
+
 ::: {.panel-tabset}
 
 ## Table
@@ -211,6 +221,10 @@ fig_map.show()
 
 :::
 
-# Deploying to GitHub Pages
+::: {.content-hidden when-format="html"}
+
+# | Deploying to GitHub Pages
 
 As a final step, you should follow the steps outlined in the prework to deplioy your report to GitHub Pages. You will be asked to share a link to your report in the course portal
+
+:::
